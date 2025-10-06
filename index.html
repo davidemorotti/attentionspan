@@ -1,0 +1,956 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AttentionSpan - Revolutionary Focus Technology</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Bangers:wght@400&family=Fredoka+One:wght@400&family=Inter:wght@400;500;600&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: url('https://media.giphy.com/media/3o7btPCcdNniyf0ArS/giphy.gif');
+            background-size: cover;
+            background-position: center center;
+            background-attachment: fixed;
+            background-repeat: no-repeat;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Mobile-specific background adjustments */
+        @media (max-width: 768px) {
+            body {
+                background-size: cover;
+                background-position: center center;
+                background-attachment: scroll;
+                min-height: 100vh;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                background-size: cover;
+                background-position: center center;
+                background-attachment: scroll;
+                min-height: 100vh;
+            }
+        }
+
+        /* Add a subtle overlay for better text readability */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.4);
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        /* Hero Section */
+        .hero-section {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            background: url('https://media.giphy.com/media/3o7btPCcdNniyf0ArS/giphy.gif');
+            background-size: cover;
+            background-position: center center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+        }
+
+        /* Mobile hero background adjustments */
+        @media (max-width: 768px) {
+            .hero-section {
+                background-attachment: scroll;
+                background-size: cover;
+                background-position: center center;
+                min-height: 100vh;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-section {
+                background-attachment: scroll;
+                background-size: cover;
+                background-position: center center;
+                min-height: 100vh;
+            }
+        }
+
+        .hero-content {
+            z-index: 10;
+            position: relative;
+            max-width: 1200px;
+            padding: 0 20px;
+        }
+
+        /* Floating Elements */
+        .floating-element {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .floating-element:nth-child(1) {
+            width: 80px;
+            height: 80px;
+            top: 20%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .floating-element:nth-child(2) {
+            width: 120px;
+            height: 120px;
+            top: 60%;
+            right: 15%;
+            animation-delay: 2s;
+        }
+
+        .floating-element:nth-child(3) {
+            width: 60px;
+            height: 60px;
+            bottom: 30%;
+            left: 20%;
+            animation-delay: 4s;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(180deg); }
+        }
+
+        .logo {
+            font-family: 'Bangers', cursive;
+            font-size: 6rem;
+            font-weight: 400;
+            margin-bottom: 20px;
+            color: #ff6b6b;
+            text-shadow: 3px 3px 0px #feca57;
+            letter-spacing: 4px;
+            animation: logoGlow 3s ease-in-out infinite alternate;
+        }
+
+        @keyframes logoGlow {
+            from { text-shadow: 3px 3px 0px #feca57; }
+            to { text-shadow: 3px 3px 0px #feca57, 0 0 20px rgba(254, 202, 87, 0.8); }
+        }
+
+        .tagline {
+            font-family: 'Inter', sans-serif;
+            font-size: 2rem;
+            margin-bottom: 40px;
+            color: rgba(255, 255, 255, 0.9);
+            font-weight: 300;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+            letter-spacing: 2px;
+        }
+
+        .hero-title {
+            font-family: 'Bangers', cursive;
+            font-size: 7rem;
+            font-weight: 400;
+            margin-bottom: 30px;
+            line-height: 0.85;
+            letter-spacing: 2px;
+            color: white;
+            text-shadow: 0 0 40px rgba(255, 255, 255, 0.6);
+            animation: titlePulse 4s ease-in-out infinite;
+        }
+
+        @keyframes titlePulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+        }
+
+        .subtitle {
+            font-family: 'Inter', sans-serif;
+            font-size: 1.8rem;
+            margin-bottom: 50px;
+            color: rgba(255, 255, 255, 0.8);
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.6;
+            font-weight: 300;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .hero-cta {
+            margin-top: 40px;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(45deg, #ff6b6b, #feca57);
+            color: white;
+            padding: 25px 50px;
+            font-family: 'Fredoka One', cursive;
+            font-size: 1.4rem;
+            font-weight: 700;
+            text-decoration: none;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            box-shadow: 0 15px 30px rgba(255, 107, 107, 0.4);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            border: 3px solid white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .cta-button:hover::before {
+            left: 100%;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 20px 40px rgba(255, 107, 107, 0.6);
+        }
+
+        /* Content Sections */
+        .content-section {
+            padding: 80px 20px;
+            position: relative;
+            background: white;
+            margin: 0;
+        }
+
+        .content-section:nth-child(even) {
+            background: #f8f9fa;
+        }
+
+        .section-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-title {
+            font-family: 'Bangers', cursive;
+            font-size: 3rem;
+            font-weight: 400;
+            color: #ff6b6b;
+            text-shadow: 2px 2px 0px #feca57;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 20px;
+        }
+
+        .section-subtitle {
+            font-family: 'Inter', sans-serif;
+            font-size: 1.3rem;
+            color: #666;
+            font-weight: 300;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
+            margin: 40px 0;
+        }
+
+        .feature {
+            background: white;
+            padding: 50px 40px;
+            border-radius: 20px;
+            border: 2px solid #ff6b6b;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .feature::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #ff6b6b, #feca57, #4facfe);
+        }
+
+        .feature:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .feature-icon {
+            font-size: 4rem;
+            margin-bottom: 30px;
+        }
+
+        .feature-title {
+            font-family: 'Bangers', cursive;
+            font-size: 2.2rem;
+            font-weight: 400;
+            margin-bottom: 25px;
+            color: #ff6b6b;
+            text-shadow: 2px 2px 0px #feca57;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .feature-desc {
+            font-family: 'Inter', sans-serif;
+            font-size: 1.2rem;
+            color: #444;
+            line-height: 1.7;
+            font-weight: 300;
+        }
+
+        .cta-section {
+            margin: 60px 0;
+            padding: 50px;
+            background: linear-gradient(135deg, #fff8e1 0%, #ffecb3 100%) !important;
+            background-image: 
+                url('data:image/svg+xml,%3Csvg width="25" height="25" viewBox="0 0 25 25" xmlns="http://www.w3.org/2000/svg"%3E%3Cg fill="%23feca57" fill-opacity="0.15"%3E%3Ccircle cx="6" cy="6" r="2"/%3E%3Ccircle cx="19" cy="19" r="2"/%3E%3Ccircle cx="6" cy="19" r="1"/%3E%3Ccircle cx="19" cy="6" r="1"/%3E%3C/g%3E%3C/svg%3E'),
+                url('data:image/svg+xml,%3Csvg width="35" height="35" viewBox="0 0 35 35" xmlns="http://www.w3.org/2000/svg"%3E%3Cg fill="%23ff6b6b" fill-opacity="0.1"%3E%3Ccircle cx="8" cy="8" r="2.5"/%3E%3Ccircle cx="27" cy="27" r="2.5"/%3E%3C/g%3E%3C/svg%3E') !important;
+            background-size: 25px 25px, 35px 35px !important;
+            background-position: 0 0, 12px 12px !important;
+            border-radius: 25px;
+            border: 6px solid #feca57;
+            box-shadow: 0 15px 35px rgba(254, 202, 87, 0.4);
+            position: relative;
+        }
+
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            top: -4px;
+            left: -4px;
+            right: -4px;
+            bottom: -4px;
+            background: linear-gradient(45deg, #feca57, #ff6b6b);
+            border-radius: 29px;
+            z-index: -1;
+            opacity: 0.4;
+        }
+
+        .cta-title {
+            font-family: 'Bangers', cursive;
+            font-size: 2.5rem;
+            font-weight: 400;
+            margin-bottom: 20px;
+            color: #ff6b6b;
+            text-shadow: 3px 3px 0px #feca57;
+            letter-spacing: 1px;
+        }
+
+        .cta-desc {
+            font-family: 'Inter', sans-serif;
+            font-size: 1.3rem;
+            margin-bottom: 30px;
+            color: #444;
+            line-height: 1.6;
+            font-weight: 500;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(45deg, #ff6b6b, #feca57);
+            color: white;
+            padding: 25px 50px;
+            font-family: 'Fredoka One', cursive;
+            font-size: 1.4rem;
+            font-weight: 700;
+            text-decoration: none;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            box-shadow: 0 15px 30px rgba(255, 107, 107, 0.4);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            border: 3px solid white;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+        }
+
+        .leaderboard-link {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.8);
+            color: #666;
+            padding: 10px 20px;
+            font-family: 'Fredoka One', cursive;
+            font-size: 0.9rem;
+            font-weight: 400;
+            text-decoration: none;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
+            border: 1px solid #ddd;
+            text-transform: none;
+            letter-spacing: 0.5px;
+        }
+
+        .leaderboard-link:hover {
+            background: rgba(255, 255, 255, 0.9);
+            color: #333;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .stats {
+            display: flex;
+            justify-content: space-around;
+            margin: 40px 0;
+            flex-wrap: wrap;
+            gap: 40px;
+        }
+
+        .stat {
+            text-align: center;
+            padding: 50px 30px;
+            background: linear-gradient(135deg, #ff6b6b 0%, #feca57 100%);
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            box-shadow: 0 15px 35px rgba(255, 107, 107, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0.1) 100%);
+            border-radius: 25px;
+        }
+
+        .stat:hover {
+            transform: translateY(-15px) scale(1.05);
+            box-shadow: 0 25px 50px rgba(255, 107, 107, 0.4);
+        }
+
+        .stat-number {
+            font-family: 'Bangers', cursive;
+            font-size: 4rem;
+            font-weight: 400;
+            color: white;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 0px rgba(0, 0, 0, 0.3);
+            position: relative;
+            z-index: 1;
+        }
+
+        .stat-label {
+            font-family: 'Inter', sans-serif;
+            font-size: 1.2rem;
+            color: white;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 500;
+            position: relative;
+            z-index: 1;
+        }
+
+        .testimonial {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            padding: 60px;
+            border-radius: 30px;
+            margin: 40px 0;
+            border-left: 6px solid #ff6b6b;
+            font-family: 'Inter', sans-serif;
+            font-style: italic;
+            font-size: 1.6rem;
+            line-height: 1.7;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            position: relative;
+            color: #444;
+            font-weight: 300;
+            text-align: center;
+        }
+
+        .testimonial::before {
+            content: '"';
+            position: absolute;
+            top: 20px;
+            left: 30px;
+            font-size: 6rem;
+            color: #ff6b6b;
+            font-family: 'Bangers', cursive;
+            opacity: 0.3;
+        }
+
+        .testimonial-author {
+            font-family: 'Inter', sans-serif;
+            margin-top: 30px;
+            text-align: center;
+            font-weight: 600;
+            color: #feca57;
+            font-size: 1.2rem;
+        }
+
+        .disclaimer {
+            background: linear-gradient(135deg, #fff3cd 0%, #ffeaa7 100%);
+            padding: 40px;
+            border-radius: 15px;
+            margin-top: 40px;
+            border-left: 6px solid #feca57;
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem;
+            line-height: 1.6;
+            color: #444;
+            text-align: left;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            font-weight: 300;
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 1024px) {
+            .hero-title {
+                font-size: 5rem;
+                line-height: 0.85;
+            }
+            
+            .section-title {
+                font-size: 2.5rem;
+            }
+            
+            .features {
+                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+                gap: 30px;
+            }
+            
+            .stats {
+                gap: 30px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero-section {
+                padding: 20px;
+            }
+            
+            .hero-title {
+                font-size: 3.5rem;
+                line-height: 0.9;
+                letter-spacing: 1px;
+            }
+
+            .logo {
+                font-size: 4rem;
+                margin-bottom: 20px;
+            }
+
+            .tagline {
+                font-size: 1.5rem;
+                margin-bottom: 30px;
+            }
+
+            .subtitle {
+                font-size: 1.4rem;
+                margin-bottom: 40px;
+            }
+            
+            .section-title {
+                font-size: 2.2rem;
+            }
+            
+            .section-subtitle {
+                font-size: 1.1rem;
+            }
+
+            .features {
+                grid-template-columns: 1fr;
+                gap: 25px;
+                margin: 30px 0;
+            }
+
+            .feature {
+                padding: 35px 25px;
+            }
+
+            .feature-title {
+                font-size: 1.8rem;
+            }
+            
+            .feature-desc {
+                font-size: 1.1rem;
+            }
+
+            .stats {
+                flex-direction: column;
+                gap: 25px;
+                margin: 30px 0;
+            }
+
+            .stat {
+                padding: 40px 25px;
+            }
+            
+            .stat-number {
+                font-size: 3.5rem;
+            }
+            
+            .stat-label {
+                font-size: 1.1rem;
+            }
+
+            .testimonial {
+                padding: 40px 25px;
+                font-size: 1.4rem;
+                margin: 30px 0;
+            }
+            
+            .testimonial::before {
+                font-size: 4rem;
+                top: 15px;
+                left: 20px;
+            }
+
+            .cta-button {
+                font-size: 1.2rem;
+                padding: 15px 30px;
+            }
+            
+            .disclaimer {
+                padding: 30px 25px;
+                margin-top: 30px;
+            }
+            
+            .content-section {
+                padding: 60px 15px;
+            }
+            
+            .section-header {
+                margin-bottom: 40px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-title {
+                font-size: 2.8rem;
+                line-height: 0.95;
+                letter-spacing: 0.5px;
+            }
+
+            .logo {
+                font-size: 3.5rem;
+            }
+
+            .tagline {
+                font-size: 1.3rem;
+            }
+
+            .subtitle {
+                font-size: 1.2rem;
+            }
+            
+            .section-title {
+                font-size: 1.8rem;
+            }
+            
+            .section-subtitle {
+                font-size: 1rem;
+            }
+
+            .feature {
+                padding: 30px 20px;
+            }
+
+            .feature-title {
+                font-size: 1.6rem;
+            }
+            
+            .feature-desc {
+                font-size: 1rem;
+            }
+
+            .stat {
+                padding: 35px 20px;
+            }
+            
+            .stat-number {
+                font-size: 3rem;
+            }
+            
+            .stat-label {
+                font-size: 1rem;
+            }
+
+            .testimonial {
+                padding: 35px 20px;
+                font-size: 1.3rem;
+            }
+            
+            .testimonial::before {
+                font-size: 3.5rem;
+                top: 10px;
+                left: 15px;
+            }
+
+            .cta-button {
+                font-size: 1.1rem;
+                padding: 12px 25px;
+            }
+            
+            .disclaimer {
+                padding: 25px 20px;
+                font-size: 0.9rem;
+            }
+            
+            .content-section {
+                padding: 50px 10px;
+            }
+            
+            .section-header {
+                margin-bottom: 30px;
+            }
+        }
+
+        @media (max-width: 360px) {
+            .hero-title {
+                font-size: 2.4rem;
+                line-height: 1;
+            }
+
+            .logo {
+                font-size: 3rem;
+            }
+
+            .tagline {
+                font-size: 1.2rem;
+            }
+
+            .subtitle {
+                font-size: 1.1rem;
+            }
+            
+            .section-title {
+                font-size: 1.6rem;
+            }
+            
+            .section-subtitle {
+                font-size: 0.9rem;
+            }
+
+            .feature {
+                padding: 25px 15px;
+            }
+
+            .feature-title {
+                font-size: 1.4rem;
+            }
+            
+            .feature-desc {
+                font-size: 0.95rem;
+            }
+
+            .stat {
+                padding: 30px 15px;
+            }
+            
+            .stat-number {
+                font-size: 2.5rem;
+            }
+            
+            .stat-label {
+                font-size: 0.9rem;
+            }
+
+            .testimonial {
+                padding: 30px 15px;
+                font-size: 1.2rem;
+            }
+            
+            .testimonial::before {
+                font-size: 3rem;
+                top: 8px;
+                left: 12px;
+            }
+
+            .cta-button {
+                font-size: 1rem;
+                padding: 10px 20px;
+            }
+            
+            .disclaimer {
+                padding: 20px 15px;
+                font-size: 0.85rem;
+            }
+            
+            .content-section {
+                padding: 40px 8px;
+            }
+            
+            .section-header {
+                margin-bottom: 25px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="floating-element"></div>
+        <div class="floating-element"></div>
+        <div class="floating-element"></div>
+        
+        <div class="hero-content">
+            <div class="logo">AttentionSpan</div>
+            <div class="tagline">The Future of Focus is Here</div>
+            
+            <h1 class="hero-title">
+                Finally, a Solution to Your<br>
+                <span style="color: #feca57;">Procrastination Problem</span>
+            </h1>
+            
+            <p class="subtitle">
+                Revolutionary eye-tracking technology that monitors your attention in real-time, 
+                delivering instant disappointment when you lose focus.
+            </p>
+
+            <div class="hero-cta">
+                <a href="app.html" class="cta-button">Start Your Focus Journey</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="content-section">
+        <div class="section-container">
+            <div class="section-header">
+                <h2 class="section-title">Why AttentionSpan?</h2>
+                <p class="section-subtitle">Experience the most advanced procrastination-busting technology ever created</p>
+            </div>
+            <div class="features">
+                <div class="feature">
+                    <div class="feature-icon">👁️</div>
+                    <h3 class="feature-title">Advanced Eye Tracking</h3>
+                    <p class="feature-desc">
+                        State-of-the-art technology monitors your gaze with military precision. 
+                        Look away for even a millisecond and face the consequences.
+                    </p>
+                </div>
+                
+                <div class="feature">
+                    <div class="feature-icon">😞</div>
+                    <h3 class="feature-title">Instant Disappointment</h3>
+                    <p class="feature-desc">
+                        Curated collection of disappointment GIFs that will make you question your life choices. 
+                        Each one carefully selected to maximize guilt and motivation.
+                    </p>
+                </div>
+                
+                <div class="feature">
+                    <div class="feature-icon">⏱️</div>
+                    <h3 class="feature-title">Real-Time Monitoring</h3>
+                    <p class="feature-desc">
+                        Track your focus streaks with precision timing. Watch your productivity soar 
+                        as you desperately try to avoid another round of disappointment.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="content-section">
+        <div class="section-container">
+            <div class="section-header">
+                <h2 class="section-title">The Numbers Don't Lie</h2>
+                <p class="section-subtitle">Our technology speaks for itself</p>
+            </div>
+            <div class="stats">
+                <div class="stat">
+                    <div class="stat-number">99.7%</div>
+                    <div class="stat-label">Accuracy Rate</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number" style="line-height: 1;">∞</div>
+                    <div class="stat-label">Disappointment GIFs</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number">0</div>
+                    <div class="stat-label">Excuses Accepted</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonial Section -->
+    <section class="content-section">
+        <div class="section-container">
+            <div class="section-header">
+                <h2 class="section-title">What Users Say</h2>
+                <p class="section-subtitle">Real stories from real people who dared to try</p>
+            </div>
+            <div class="testimonial">
+                "I used to procrastinate for hours. Now I'm terrified to look away from my screen. 
+                My productivity has increased 300%, though my self-esteem has decreased proportionally. 
+                Worth it."
+                <div class="testimonial-author">- Sarah K., Former Procrastinator</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Final CTA Section -->
+    <section class="content-section">
+        <div class="section-container">
+            <div class="cta-section">
+                <h2 class="cta-title">Ready to Transform Your Life?</h2>
+                <p class="cta-desc">
+                    Join thousands of productivity enthusiasts who have discovered the power of 
+                    shame-based motivation. Your future focused self will thank you.
+                </p>
+                <a href="app.html" class="cta-button">Start Your Focus Journey</a><br>
+                <a href="leaderboard.html" class="leaderboard-link">🏆 View Leaderboard</a>
+            </div>
+
+            <div class="disclaimer">
+                <strong>Disclaimer:</strong> AttentionSpan is not responsible for any existential crises, 
+                increased anxiety, or the sudden realization that you've been avoiding important tasks 
+                for years. Side effects may include improved productivity, better focus, and occasional 
+                nightmares about disappointed GIFs. Use at your own risk.
+            </div>
+        </div>
+    </section>
+
+    <script defer data-domain="davidemorotti.com" src="https://analytics.ampsand.ch/js/script.js"></script>
+</body>
+</html>

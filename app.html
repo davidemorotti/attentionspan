@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AttentionSpan - Focus Monitor</title>
+    <!-- MediaPipe Face Mesh for precise eyeball tracking -->
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/control_utils/control_utils.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/drawing_utils/drawing_utils.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/face_mesh/face_mesh.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="style.css?v=1.0.5">
+</head>
+<body>
+    <div class="main-container">
+        <!-- Background GIF -->
+        <img class="background-gif" id="backgroundGif" src="" alt="Background" style="display: none;">
+        
+        <!-- Countdown Screen -->
+        <div class="loading-screen" id="loadingScreen">
+            <div class="loading-content">
+                <div class="loading-text">Get ready to focus!</div>
+                <div class="instructions">
+                    <strong style="display: block; margin-bottom: 10px;">App is loading, as soon as the countdown finishes:</strong>
+                    • Keep watching the countdown circle<br>
+                    • Don't move your head<br>
+                    • Stay focused!
+                </div>
+                <div class="focus-dot" id="countdownTimer">
+                    <div class="loading-spinner"></div>
+                </div>
+                <div class="loading-status" id="loadingStatus">Initializing...</div>
+            </div>
+        </div>
+
+        <!-- Focus Timer -->
+        <div class="focus-dot" id="focusDot">0:00</div>
+        
+        <!-- Button Container -->
+        <div class="button-container" id="buttonContainer" style="display: none;">
+            <button class="try-again-btn" id="tryAgainBtn" onclick="tryAgain()">🔄 TRY AGAIN</button>
+            <button class="register-btn" id="registerBtn" onclick="showRegistrationModal()">📝 REGISTER SCORE</button>
+        </div>
+        
+        <!-- Leaderboard Button -->
+        <a href="leaderboard.html" class="leaderboard-btn" target="_blank">🏆 LEADERBOARD</a>
+        
+        <!-- Registration Modal -->
+        <div id="registrationModal" class="modal" style="display: none;">
+            <div class="modal-content">
+                <h2>🏆 Register Your Score!</h2>
+                <p>Congratulations! You focused for <span id="finalTime"></span></p>
+                <form id="registrationForm" onsubmit="event.preventDefault(); submitScore();">
+                    <input type="text" id="playerName" placeholder="Enter your name" maxlength="20" required>
+                    <div class="modal-buttons">
+                        <button type="button" onclick="hideRegistrationModal()">Cancel</button>
+                        <button type="submit">Register Score</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        
+        <!-- MediaPipe Video Container -->
+        <div id="mediapipeVideoContainer">
+            <video id="video" autoplay muted playsinline style="display: none;"></video>
+        </div>
+        
+        <!-- Debug Overlay -->
+        <div class="debug-overlay" id="debugOverlay" style="display: block;">
+            <div class="debug-info" id="debugInfo" style="display: none;">
+                <div>Gaze Tracking: <span id="gazeTracking">Initializing...</span></div>
+                <div>Looking: <span id="lookingAtCamera">No</span></div>
+                <div>Gaze Moved: <span id="gazeMoved">No</span></div>
+                <div>Movement X: <span id="movementX">0</span></div>
+                <div>Movement Y: <span id="movementY">0</span></div>
+                <div>Gaze Position: <span id="gazePosition">N/A</span></div>
+                <div>Focus Status: <span id="focusStatus">Focused</span></div>
+            </div>
+        </div>
+
+
+        <!-- Controls Panel -->
+        <div class="controls-panel">
+            <button class="btn" onclick="closeSession()" style="display: none;">❌ CLOSE</button>
+            </div>
+
+        <canvas id="canvas" style="display: none;"></canvas>
+    </div>
+
+    <script src="main.js?v=1.0.5"></script>
+    <script defer data-domain="davidemorotti.com" src="https://analytics.ampsand.ch/js/script.js"></script>
+</body>
+</html>
