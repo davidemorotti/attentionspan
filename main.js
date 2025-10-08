@@ -324,8 +324,14 @@ function processGazeTracking(landmarks) {
         
         // Thresholds in normalized coordinates (0-1 range)
         // These work consistently across ALL devices!
-        const horizontalThreshold = 0.001; // 0.15% of frame width
-        const verticalThreshold = 0.0005; // 0.1% of frame height
+
+        let horizontalThreshold = 0.001; // 0.15% of frame width
+        let verticalThreshold = 0.0005; // 0.1% of frame height
+
+        if(isMobileDevice) {
+            horizontalThreshold = 0.0015; // 0.15% of frame width
+            verticalThreshold = 0.0010; // 0.1% of frame height
+        }
         
         // Check for significant gaze direction changes
         const horizontalMovement = Math.abs(deltaX) > horizontalThreshold;
