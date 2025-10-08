@@ -32,6 +32,31 @@ You know that feeling when you're supposed to be working but instead you're:
 - 🏆 **Leaderboard of champions** (who apparently have no social lives)
 - 📱 **Mobile-friendly shame** (now you can feel bad anywhere!)
 
+## Prerequisites & Setup 🔧
+
+### Required:
+- **Web server with PHP support** (Apache, Nginx, or local development server)
+- **Giphy API key** (free from https://developers.giphy.com/)
+- **HTTPS or localhost** (required for camera access)
+
+### API Configuration:
+
+1. **Get Giphy API Key:**
+   - Visit https://developers.giphy.com/
+   - Create account and get free API key
+   - Replace `$GIPHY_API_KEY` in `giphy.php` (line 78)
+
+2. **Configure CORS Domains:**
+   - Edit `giphy.php` line 4: `$allowedDomains = ['yourdomain.com'];`
+   - Add your actual domain(s) to the array
+   - For localhost: `$allowedDomains = ['localhost', '127.0.0.1'];`
+
+3. **File Permissions:**
+   ```bash
+   chmod 666 leaderboard_data.txt
+   chmod 666 rate_limit.txt
+   ```
+
 ## Installation (Why Are You Still Reading This?) 🚀
 
 ```bash
@@ -41,26 +66,43 @@ git clone https://github.com/davidemorotti/attentionspan.git
 # Navigate to the folder of regret
 cd attentionspan
 
-# Open in your browser and prepare for disappointment
-# No build process needed - we're not fancy enough for that
+# Configure your Giphy API key and CORS domains (see Prerequisites above)
+
+# Start a local PHP server
+php -S localhost:8000
+
+# Open http://localhost:8000/app.html in your browser
+# Prepare for disappointment
 ```
 
 ## Usage Instructions 📖
 
-1. **Open `index.html`** in your browser
-2. **Click "Start Your Focus Journey"** (spoiler: it's not a journey, it's a guilt trip)
-3. **Allow camera access** (yes, we're watching you)
+1. **Open `app.html`** in your browser (the main app)
+2. **Allow camera access** (yes, we're watching you)
+3. **Wait for the 3-second countdown** (time to prepare for disappointment)
 4. **Try to focus** (good luck with that)
 5. **Get disappointed** (this is the main feature)
-6. **Repeat until you question your life choices**
+6. **Click "Try Again"** to restart your misery
+7. **Register your score** to join the leaderboard of shame
+8. **Repeat until you question your life choices**
 
 ## Technical Details (For the Nerds) 🔧
 
 - **Frontend**: Pure HTML/CSS/JavaScript (because we're not pretentious)
-- **Eye Tracking**: TensorFlow.js Face Landmarks Detection with MediaPipe Iris model (Google's gift to judgmental apps)
+- **Eye Tracking**: MediaPipe Face Mesh with Iris landmarks (468 facial landmarks for maximum judgment)
 - **Backend**: PHP (because we hate ourselves)
 - **Database**: Text files (we're not fancy enough for SQL)
-- **Security**: Questionable at best (see `leaderboard.php` for details)
+- **API**: Giphy API for disappointment GIFs
+- **Security**: CORS protection, rate limiting, input validation
+- **Browser Support**: Modern browsers with WebRTC support (Chrome, Firefox, Safari, Edge)
+
+## Security Notes ⚠️
+
+- **API Key**: Never commit your Giphy API key to public repositories
+- **CORS**: Configure allowed domains to prevent unauthorized access
+- **Rate Limiting**: Built-in protection against spam (10 requests/hour per IP)
+- **Input Validation**: All user inputs are sanitized and validated
+- **File Permissions**: Ensure proper permissions for data files
 
 ## Known Issues (There Are Many) 🐛
 
@@ -69,6 +111,49 @@ cd attentionspan
 - **Eye tracking accuracy varies** (depends on how much coffee you've had)
 - **Works best with good lighting** (and low self-esteem)
 - **May trigger imposter syndrome** (especially if you're already prone to it)
+- **Camera access required** (privacy concerns are valid)
+- **Giphy API rate limits** (free tier has daily limits)
+
+## Troubleshooting 🔧
+
+### Common Issues:
+
+**"Camera not working"**
+- Ensure you're using HTTPS or localhost
+- Check browser permissions for camera access
+- Try refreshing the page
+
+**"GIFs not loading"**
+- Check your Giphy API key in `giphy.php`
+- Verify CORS domain configuration
+- Check browser console for errors
+
+**"Leaderboard not working"**
+- Ensure PHP server is running
+- Check file permissions for `leaderboard_data.txt`
+- Verify CORS headers in `leaderboard.php`
+
+**"Eye tracking not accurate"**
+- Ensure good lighting conditions
+- Keep face centered in camera view
+- Avoid wearing glasses (if possible)
+- Try different browsers
+
+**"CORS errors"**
+- Update `$allowedDomains` in `giphy.php`
+- Add your domain to the allowed list
+- For localhost: `['localhost', '127.0.0.1']`
+
+### Development Setup:
+
+```bash
+# For local development
+php -S localhost:8000
+
+# For production (example with Apache)
+# Ensure mod_rewrite is enabled
+# Configure virtual host with PHP support
+```
 
 ## Contributing (Please Don't) 🤝
 
@@ -121,10 +206,11 @@ please contact us immediately so we can fix this bug.
 
 ## Acknowledgments 🙏
 
-- **Google TensorFlow.js** for making eye tracking judgmental with iris precision
+- **Google MediaPipe** for making eye tracking judgmental with iris precision
 - **Giphy** for providing endless disappointment
 - **Our users** for being masochistic enough to use this
 - **Our sanity** for leaving us long ago
+- **PHP** for existing (we're not sure why)
 
 ## Final Thoughts 💭
 

@@ -42,7 +42,9 @@ let gifCooldownEndTime = 0;
 let gifCooldownDuration = 2000;
 let gifAutoHideTimeout = null;
 let consecutiveMovementCount = 0;
-let requiredConsecutiveMovements = 2;
+// Mobile devices need lower consecutive requirement due to tracking instability
+const isMobileDevice = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+let requiredConsecutiveMovements = isMobileDevice ? 1 : 2;
 
 // Countdown variables
 let countdownActive = false;
@@ -75,6 +77,8 @@ const isDebugMode = urlParams.get('debug') === 'true';
 console.log('🔍 Debug mode:', isDebugMode);
 console.log('🔍 Current URL:', window.location.href);
 console.log('🔍 URL params:', window.location.search);
+console.log('📱 Mobile device detected:', isMobileDevice);
+console.log('🎯 Required consecutive movements:', requiredConsecutiveMovements);
 
 // Initialize MediaPipe Face Mesh
 async function initializeMediaPipeFaceMesh() {
@@ -302,25 +306,26 @@ function processGazeTracking(landmarks) {
     
     if (!leftIrisCenter || !rightIrisCenter) return;
     
-    // Calculate average iris center
+    // Calculate average iris center in normalized coordinates (0-1 range)
     const irisCenter = {
         x: (leftIrisCenter.x + rightIrisCenter.x) / 2,
         y: (leftIrisCenter.y + rightIrisCenter.y) / 2
     };
     
-    // Convert to canvas coordinates for movement detection
-    const canvasX = irisCenter.x * canvas.width;
-    const canvasY = irisCenter.y * canvas.height;
+    // Use normalized coordinates directly - device independent!
+    // No pixel conversion needed
     
     // Check for gaze direction changes (left/right/up/down)
     let gazeDirectionChanged = false;
     if (lastIrisPosition) {
-        const deltaX = canvasX - lastIrisPosition.x;
-        const deltaY = canvasY - lastIrisPosition.y;
+        // Calculate movement in normalized space (0-1 range)
+        const deltaX = irisCenter.x - lastIrisPosition.x;
+        const deltaY = irisCenter.y - lastIrisPosition.y;
         
-        // Set different thresholds for horizontal vs vertical movements
-        const horizontalThreshold = 1; // 1 pixel for left/right movements
-        const verticalThreshold = 0.5; // 0.5 pixels for up/down movements (more sensitive)
+        // Thresholds in normalized coordinates (0-1 range)
+        // These work consistently across ALL devices!
+        const horizontalThreshold = 0.001; // 0.15% of frame width
+        const verticalThreshold = 0.0005; // 0.1% of frame height
         
         // Check for significant gaze direction changes
         const horizontalMovement = Math.abs(deltaX) > horizontalThreshold;
@@ -338,7 +343,7 @@ function processGazeTracking(landmarks) {
             direction = deltaY > 0 ? 'down' : 'up';
         }
         
-        console.log(`👁️ Gaze direction: ${direction} | deltaX=${deltaX.toFixed(1)}px (H:${horizontalThreshold}px), deltaY=${deltaY.toFixed(1)}px (V:${verticalThreshold}px), changed=${gazeDirectionChanged}`);
+        console.log(`👁️ Gaze direction: ${direction} | deltaX=${(deltaX * 100).toFixed(2)}% (H:${(horizontalThreshold * 100).toFixed(1)}%), deltaY=${(deltaY * 100).toFixed(2)}% (V:${(verticalThreshold * 100).toFixed(1)}%), changed=${gazeDirectionChanged}`);
         
         if (gazeDirectionChanged) {
             consecutiveMovementCount++;
@@ -348,7 +353,8 @@ function processGazeTracking(landmarks) {
         }
     }
     
-    lastIrisPosition = { x: canvasX, y: canvasY };
+    // Store normalized coordinates
+    lastIrisPosition = { x: irisCenter.x, y: irisCenter.y };
     
     // Update focus status
     const now = Date.now();
