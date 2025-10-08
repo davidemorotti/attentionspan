@@ -18,7 +18,7 @@ You know that feeling when you're supposed to be working but instead you're:
 
 ## How It Works (Or Doesn't) 🔬
 
-1. **Eye Tracking Magic**: Uses MediaPipe Face Mesh to track your eyeballs with the accuracy of a hawk that's had too much coffee
+1. **Advanced Iris Tracking**: Uses TensorFlow.js Face Landmarks Detection with MediaPipe Iris model to track your eyeballs with military precision - now with 468 facial landmarks including iris keypoints
 2. **Disappointment Delivery**: The moment you look away, you get hit with a curated collection of disappointment GIFs
 3. **Shame Spiral**: Watch your self-esteem decrease proportionally to your productivity increase
 4. **Leaderboard of Shame**: Compete with other masochists to see who can stare at their screen the longest
@@ -57,7 +57,7 @@ cd attentionspan
 ## Technical Details (For the Nerds) 🔧
 
 - **Frontend**: Pure HTML/CSS/JavaScript (because we're not pretentious)
-- **Eye Tracking**: MediaPipe Face Mesh (Google's gift to judgmental apps)
+- **Eye Tracking**: TensorFlow.js Face Landmarks Detection with MediaPipe Iris model (Google's gift to judgmental apps)
 - **Backend**: PHP (because we hate ourselves)
 - **Database**: Text files (we're not fancy enough for SQL)
 - **Security**: Questionable at best (see `leaderboard.php` for details)
@@ -121,7 +121,7 @@ please contact us immediately so we can fix this bug.
 
 ## Acknowledgments 🙏
 
-- **Google MediaPipe** for making eye tracking judgmental
+- **Google TensorFlow.js** for making eye tracking judgmental with iris precision
 - **Giphy** for providing endless disappointment
 - **Our users** for being masochistic enough to use this
 - **Our sanity** for leaving us long ago

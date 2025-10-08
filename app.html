@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AttentionSpan - Focus Monitor</title>
-    <!-- MediaPipe Face Mesh for precise eyeball tracking -->
+    <!-- MediaPipe Face Mesh with Iris landmarks -->
     <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/@mediapipe/control_utils/control_utils.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/@mediapipe/drawing_utils/drawing_utils.js" crossorigin="anonymous"></script>
@@ -62,8 +62,10 @@
         
         <!-- MediaPipe Video Container -->
         <div id="mediapipeVideoContainer">
-            <video id="video" autoplay muted playsinline style="display: none;"></video>
+            <video id="video" autoplay muted playsinline style="display: block !important; width: 100% !important; height: 100% !important; object-fit: cover !important;"></video>
+            <canvas id="debugCanvas" style="position: fixed !important; top: 0 !important; left: 0 !important; transform: none !important; width: 100vw !important; height: 100vh !important; border: none !important; z-index: 99999 !important; background: transparent !important; display: block !important; visibility: visible !important; opacity: 1 !important;"></canvas>
         </div>
+        
         
         <!-- Debug Overlay -->
         <div class="debug-overlay" id="debugOverlay" style="display: block;">
@@ -84,10 +86,9 @@
             <button class="btn" onclick="closeSession()" style="display: none;">❌ CLOSE</button>
             </div>
 
-        <canvas id="canvas" style="display: none;"></canvas>
     </div>
 
-    <script src="main.js?v=1.0.5"></script>
+    <script src="main.js?v=1.0.6"></script>
     <script defer data-domain="davidemorotti.com" src="https://analytics.ampsand.ch/js/script.js"></script>
 </body>
 </html>
